@@ -5,9 +5,20 @@ import sys
 from dotenv import load_dotenv
 
 
+def prepare_data_directory():
+    base = os.path.join(os.path.dirname(__file__), 'data')
+    os.makedirs(os.path.join(base, 'cache'), exist_ok=True)
+    os.makedirs(os.path.join(base, 'logs'), exist_ok=True)
+    os.makedirs(os.path.join(base, 'media'), exist_ok=True)
+    os.makedirs(os.path.join(base, 'sqlite3'), exist_ok=True)
+    os.makedirs(os.path.join(base, 'static'), exist_ok=True)
+    os.makedirs(os.path.join(base, 'postgres'), exist_ok=True)
+
+
 def main():
     dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
     dotenv_path and load_dotenv(dotenv_path)
+    prepare_data_directory()
 
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', '{{ cookiecutter.project_slug }}.settings')
