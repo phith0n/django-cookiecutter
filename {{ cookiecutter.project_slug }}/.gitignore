@@ -128,7 +128,7 @@ jspm_packages/
 .vscode
 
 # User-specific stuff:
-idea/
+.idea/
 
 # CMake
 cmake-build-debug/
@@ -253,3 +253,4 @@ db.sqlite3
 /data/
 
 .pytest_cache/
+.env
