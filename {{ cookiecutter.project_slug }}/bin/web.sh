@@ -2,12 +2,15 @@
 
 set -eo pipefail
 
-./manage.py collectstatic --no-input
-./manage.py migrate --no-input
-
 dirs=('cache' 'logs' 'media' 'sqlite3' 'statiic')
 for dir in "${dirs[@]}"; do
   mkdir -p "data/${dir}"
+done
+
+./manage.py collectstatic --no-input
+./manage.py migrate --no-input
+
+for dir in "${dirs[@]}"; do
   chown -R nobody:nogroup "data/${dir}"
 done
 
