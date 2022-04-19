@@ -186,3 +186,5 @@ SECURE_REFERRER_POLICY = 'origin-when-cross-origin'
 # SECURE_SSL_REDIRECT = not DEBUG
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 X_FRAME_OPTIONS = 'deny'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
