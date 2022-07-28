@@ -126,7 +126,7 @@ CACHES = {
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {
        'standard': {
            'format': '[%(asctime)s] - [%(levelname)s] - [%(pathname)s:%(lineno)d]  - %(message)s',
@@ -141,7 +141,8 @@ LOGGING = {
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'formatter': 'standard'
+            'formatter': 'standard',
+            'filters': ['discard_not_found_error'],
         },
         'file': {
             'level': 'DEBUG',
@@ -158,14 +159,14 @@ LOGGING = {
         },
         'django': {
             'handlers': ['console', 'file'],
-            'level': 'INFO',
+            'level': 'WARNING',
             'propagate': False
         },
     },
     'filters': {
         'discard_not_found_error': {
             '()': 'django.utils.log.CallbackFilter',
-            'callback': lambda record: not hasattr(record, 'status_code') or (hasattr(record, 'status_code') and record.status_code != 404),
+            'callback': lambda record: not hasattr(record, 'status_code') or (hasattr(record, 'status_code') and record.status_code not in [404, 410]),
         }
     },
 }
