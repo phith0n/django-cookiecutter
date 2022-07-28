@@ -166,7 +166,8 @@ LOGGING = {
     'filters': {
         'discard_not_found_error': {
             '()': 'django.utils.log.CallbackFilter',
-            'callback': lambda record: not hasattr(record, 'status_code') or (hasattr(record, 'status_code') and record.status_code not in [404, 410]),
+            'callback': lambda record: (not hasattr(record, 'status_code')) or
+            (hasattr(record, 'status_code') and not (400 <= record.status_code < 500)),
         }
     },
 }
